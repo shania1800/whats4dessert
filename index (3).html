@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What's 4 Dessert — Freeport, NY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Cabinet+Grotesk:wght@300;400;500;700;800;900&family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* ── LIGHT BRAND PALETTE ── */
+  --bg:        #FFFBF5;        /* warm vanilla white */
+  --bg2:       #FFF5E8;        /* slightly deeper cream */
+  --choc:      #1E0E06;        /* deep chocolate — main dark */
+  --choc2:     #3B1A0A;        /* medium chocolate */
+  --caramel:   #C96A10;        /* rich caramel — primary action */
+  --caramel2:  #E8852A;        /* lighter caramel hover */
+  --strawberry:#E03E5A;        /* strawberry red — pop color */
+  --berry2:    #F5607A;        /* lighter berry */
+  --mint:      #1C9B6A;        /* deep mint — open/live indicator */
+  --surface:   #FFFFFF;        /* card backgrounds */
+  --surface2:  #FDF0E0;        /* warm tinted card */
+  --border:    rgba(30,14,6,0.09);
+  --border-hi: rgba(30,14,6,0.18);
+  --text:      #1E0E06;
+  --text2:     #3B1A0A;
+  --muted:     rgba(30,14,6,0.45);
+  --display:   'Bebas Neue', sans-serif;
+  --display2:  'DM Serif Display', Georgia, serif;
+  --head:      'Syne', sans-serif;
+  --body:      'Cabinet Grotesk', sans-serif;
+  --ease:      cubic-bezier(0.16,1,0.3,1);
+  --r:         16px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--bg);color:var(--text);overflow-x:hidden}
+
+/* subtle warm dot pattern */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:radial-gradient(circle, rgba(201,106,16,0.06) 1px, transparent 1px);
+  background-size:28px 28px;
+  pointer-events:none;z-index:0;
+}
+
+/* ════════════════════════════════════════
+   NAV
+════════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:18px 5%;display:flex;align-items:center;justify-content:space-between;
+  transition:all .4s var(--ease);
+}
+nav.solid{
+  background:rgba(255,251,245,0.95);
+  backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:1px solid var(--border);
+  padding:12px 5%;
+  box-shadow:0 2px 24px rgba(30,14,6,0.06);
+}
+.nav-logo{
+  font-family:var(--display);font-size:22px;letter-spacing:2px;
+  text-transform:uppercase;color:var(--choc);text-decoration:none;
+}
+.nav-logo sup{font-family:var(--head);font-size:9px;color:var(--caramel);letter-spacing:1px;vertical-align:super}
+.nav-center{
+  display:flex;gap:4px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:100px;padding:5px;
+  box-shadow:0 2px 12px rgba(30,14,6,0.06);
+}
+.nav-center a{
+  font-family:var(--head);font-size:12.5px;font-weight:600;
+  color:var(--muted);text-decoration:none;
+  padding:8px 18px;border-radius:100px;
+  transition:all .2s;letter-spacing:.3px;
+}
+.nav-center a:hover{color:var(--text);background:var(--bg2)}
+.nav-pill{background:var(--choc) !important;color:#FFF8F0 !important;font-weight:700 !important}
+.nav-pill:hover{background:var(--choc2) !important;transform:scale(1.02)}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.nav-burger span{width:22px;height:2px;background:var(--choc);border-radius:2px;display:block;transition:all .3s}
+
+/* ════════════════════════════════════════
+   MOBILE MENU
+════════════════════════════════════════ */
+.mob{display:none;position:fixed;inset:0;z-index:490;background:var(--choc);flex-direction:column;align-items:center;justify-content:center;gap:24px}
+.mob.open{display:flex}
+.mob a{font-family:var(--display);font-size:56px;letter-spacing:3px;text-transform:uppercase;color:#FFF8F0;text-decoration:none;transition:color .2s}
+.mob a:hover{color:var(--caramel2)}
+.mob-x{position:absolute;top:24px;right:5%;background:none;border:none;color:rgba(255,248,240,0.5);font-size:28px;cursor:pointer}
+
+/* ════════════════════════════════════════
+   HERO
+════════════════════════════════════════ */
+#hero{
+  min-height:100svh;
+  background:var(--choc);
+  display:grid;grid-template-rows:1fr auto;
+  padding:130px 5% 64px;
+  position:relative;overflow:hidden;
+}
+
+/* chocolate waffle texture pattern */
+#hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(0deg,   transparent, transparent 40px, rgba(255,248,240,0.03) 40px, rgba(255,248,240,0.03) 41px),
+    repeating-linear-gradient(90deg,  transparent, transparent 40px, rgba(255,248,240,0.03) 40px, rgba(255,248,240,0.03) 41px);
+  pointer-events:none;
+}
+
+/* warm glow orbs */
+.hero-orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;animation:morph 10s ease-in-out infinite alternate}
+.hero-orb-1{width:560px;height:560px;background:radial-gradient(circle,rgba(201,106,16,0.25),transparent 70%);top:-80px;right:-80px;animation-duration:9s}
+.hero-orb-2{width:380px;height:380px;background:radial-gradient(circle,rgba(224,62,90,0.15),transparent 70%);bottom:60px;left:-60px;animation-duration:12s;animation-delay:-4s}
+@keyframes morph{0%{border-radius:60% 40% 30% 70%/60% 30% 70% 40%}50%{border-radius:30% 60% 70% 40%/50% 60% 30% 60%}100%{border-radius:50% 60% 30% 60%/40% 70% 60% 30%}}
+
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--head);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--caramel2);margin-bottom:24px;
+  opacity:0;transform:translateY(16px);animation:fadeUp .6s .1s var(--ease) forwards;
+}
+.eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--caramel2);animation:pdot 2s infinite}
+@keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.6)}}
+
+h1.hero-headline{
+  font-family:var(--display);
+  font-size:clamp(72px,16vw,176px);
+  font-weight:400;line-height:.88;letter-spacing:3px;
+  color:#FFF8F0;text-transform:uppercase;
+  position:relative;z-index:2;
+}
+h1.hero-headline .line{display:block;overflow:hidden}
+h1.hero-headline .line span{display:block;opacity:0;transform:translateY(110%);animation:slideUp .8s var(--ease) forwards}
+h1.hero-headline .line:nth-child(1) span{animation-delay:.2s}
+h1.hero-headline .line:nth-child(2) span{animation-delay:.35s}
+h1.hero-headline .line:nth-child(3) span{animation-delay:.5s}
+/* "SWEETER" outlined in caramel */
+h1.hero-headline em{font-style:normal;-webkit-text-fill-color:transparent;-webkit-text-stroke:3px var(--caramel2);color:transparent}
+/* "FREEPORT" filled gradient */
+.accent-fill{background:linear-gradient(120deg,var(--caramel2),var(--strawberry));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* floating cards — lighter glass on dark hero */
+.hero-float{
+  position:absolute;
+  background:rgba(255,248,240,0.07);
+  border:1px solid rgba(255,248,240,0.14);
+  border-radius:18px;padding:18px 22px;
+  backdrop-filter:blur(20px);
+}
+.hero-float-1{top:175px;right:5%;opacity:0;transform:translateY(20px) rotate(2deg);animation:fadeUp .8s .7s var(--ease) forwards}
+.hero-float-2{bottom:200px;right:5%;opacity:0;transform:translateY(20px) rotate(-1.5deg);animation:fadeUp .8s .9s var(--ease) forwards}
+.float-num{font-family:var(--display);font-size:52px;color:var(--caramel2);line-height:1}
+.float-label{font-size:11px;color:rgba(255,248,240,0.5);margin-top:3px;font-family:var(--head)}
+.live-badge{display:flex;align-items:center;gap:8px;font-size:12px;color:#4DEBA3;font-weight:600;font-family:var(--head)}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#4DEBA3;animation:pdot 1.5s infinite}
+
+.hero-bottom{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  opacity:0;transform:translateY(16px);animation:fadeUp .8s .65s var(--ease) forwards;
+  padding-top:44px;border-top:1px solid rgba(255,248,240,0.1);
+}
+.hero-desc{font-size:15px;line-height:1.8;color:rgba(255,248,240,0.6);max-width:420px}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+
+.btn-primary{
+  background:var(--caramel);color:#FFF8F0;
+  padding:15px 32px;border-radius:100px;
+  font-family:var(--head);font-size:13px;font-weight:700;
+  text-decoration:none;letter-spacing:.3px;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all .2s var(--ease);
+}
+.btn-primary:hover{background:var(--caramel2);transform:translateY(-2px);box-shadow:0 16px 40px rgba(201,106,16,.4)}
+.btn-outline-light{
+  border:1.5px solid rgba(255,248,240,0.25);color:#FFF8F0;
+  padding:15px 32px;border-radius:100px;
+  font-family:var(--head);font-size:13px;font-weight:500;
+  text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+  transition:all .2s var(--ease);
+}
+.btn-outline-light:hover{border-color:var(--caramel2);background:rgba(201,106,16,.1)}
+
+/* ════════════════════════════════════════
+   MARQUEE
+════════════════════════════════════════ */
+.marquee-wrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--choc);padding:15px 0;position:relative;z-index:1}
+.marquee-track{display:flex;width:max-content;animation:ticker 28s linear infinite}
+.marquee-track:hover{animation-play-state:paused}
+.marquee-item{display:flex;align-items:center;gap:18px;padding:0 24px;font-family:var(--head);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,248,240,0.35);white-space:nowrap}
+.marquee-item:hover{color:var(--caramel2)}
+.marquee-item .dot{color:var(--caramel);font-size:16px;line-height:0}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ════════════════════════════════════════
+   SECTION COMMONS
+════════════════════════════════════════ */
+section{padding:96px 5%;position:relative;z-index:1}
+.section-label{
+  font-family:var(--head);font-size:11px;font-weight:700;
+  letter-spacing:3px;text-transform:uppercase;color:var(--caramel);
+  display:flex;align-items:center;gap:10px;margin-bottom:16px;
+}
+.section-label::before{content:'';width:24px;height:2px;background:var(--caramel);border-radius:2px}
+.section-heading{
+  font-family:var(--display);
+  font-size:clamp(48px,7vw,96px);
+  font-weight:400;line-height:.95;letter-spacing:2px;
+  text-transform:uppercase;color:var(--choc);margin-bottom:52px;
+}
+.section-heading span.accent{color:var(--caramel)}
+.section-heading span.pop{color:var(--strawberry)}
+
+/* ════════════════════════════════════════
+   GALLERY BENTO
+════════════════════════════════════════ */
+#gallery{background:var(--bg)}
+.bento{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:300px 300px;gap:12px}
+.bento-cell{border-radius:20px;overflow:hidden;position:relative;background:var(--surface2);border:1px solid var(--border)}
+.bento-cell:nth-child(1){grid-column:span 7}
+.bento-cell:nth-child(2){grid-column:span 5}
+.bento-cell:nth-child(3){grid-column:span 4}
+.bento-cell:nth-child(4){grid-column:span 5}
+.bento-cell:nth-child(5){grid-column:span 3}
+.bento-cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease),filter .3s}
+.bento-cell:hover img{transform:scale(1.06);filter:saturate(1.15) brightness(.9)}
+.bento-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,14,6,.7) 0%,transparent 55%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:22px}
+.bento-cell:hover .bento-overlay{opacity:1}
+.bento-caption{font-family:var(--display);font-size:24px;letter-spacing:1.5px;text-transform:uppercase;color:#FFF8F0}
+.bento-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,var(--surface2),var(--bg2))}
+.bento-ph-icon{font-size:44px;opacity:.4}
+.bento-ph-text{font-size:11px;font-family:var(--head);letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);opacity:.7}
+
+/* shimmer */
+.shimmer{background:linear-gradient(90deg,rgba(30,14,6,.04) 25%,rgba(30,14,6,.08) 50%,rgba(30,14,6,.04) 75%);background-size:200% 100%;animation:shimmer 1.8s infinite}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* ════════════════════════════════════════
+   MENU
+════════════════════════════════════════ */
+#menu{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.menu-header{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:40px;flex-wrap:wrap}
+.menu-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.menu-tab{
+  font-family:var(--head);font-size:13px;font-weight:600;
+  padding:11px 22px;border-radius:100px;min-height:44px;
+  border:1.5px solid var(--border-hi);background:var(--surface);
+  color:var(--muted);cursor:pointer;
+  transition:all .2s var(--ease);letter-spacing:.3px;
+  box-shadow:0 1px 4px rgba(30,14,6,.06);
+}
+.menu-tab.active,.menu-tab:hover{background:var(--choc);color:#FFF8F0;border-color:var(--choc);box-shadow:0 4px 20px rgba(30,14,6,.2)}
+.menu-grid{display:none}
+.menu-grid.active{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.menu-card{
+  background:var(--surface);border:1.5px solid var(--border);
+  border-radius:20px;overflow:hidden;
+  transition:transform .3s var(--ease),box-shadow .3s,border-color .2s;
+  box-shadow:0 2px 12px rgba(30,14,6,.05);
+}
+.menu-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(30,14,6,.12);border-color:var(--border-hi)}
+.menu-img{height:200px;overflow:hidden;background:var(--bg2);position:relative}
+.menu-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease)}
+.menu-card:hover .menu-img img{transform:scale(1.08)}
+.menu-img-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:56px;background:linear-gradient(135deg,var(--bg2),var(--surface2))}
+.menu-body{padding:20px 22px 24px}
+.menu-name{font-family:var(--display);font-size:24px;letter-spacing:1px;text-transform:uppercase;margin-bottom:7px;color:var(--choc);line-height:1}
+.menu-desc{font-size:13.5px;color:var(--muted);line-height:1.7;margin-bottom:14px}
+.menu-footer{display:flex;align-items:center;justify-content:space-between}
+.menu-price{font-family:var(--head);font-size:22px;font-weight:800;color:var(--caramel)}
+.menu-badge{font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);border:1.5px solid var(--border-hi);padding:5px 12px;border-radius:100px}
+
+/* ════════════════════════════════════════
+   STORY
+════════════════════════════════════════ */
+#story{background:var(--bg)}
+.story-bento{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.story-text-cell{
+  grid-row:span 2;
+  background:var(--choc);
+  border-radius:24px;padding:52px 48px;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;overflow:hidden;
+}
+/* big decorative quote mark */
+.story-text-cell::before{content:'"';position:absolute;top:-20px;left:16px;font-family:var(--display);font-size:220px;color:rgba(255,248,240,0.04);line-height:1;pointer-events:none}
+.story-heading{font-family:var(--display);font-size:clamp(40px,4.5vw,64px);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;color:#FFF8F0;line-height:.95}
+.story-heading span{color:var(--caramel2)}
+.story-body{font-size:15px;line-height:1.85;color:rgba(255,248,240,0.55);margin-bottom:28px}
+.pillars{display:flex;flex-direction:column;gap:10px}
+.pillar{display:flex;gap:14px;align-items:flex-start;padding:14px;border-radius:12px;border:1px solid rgba(255,248,240,0.07);background:rgba(255,248,240,0.03);transition:border-color .2s,background .2s}
+.pillar:hover{border-color:rgba(201,106,16,.4);background:rgba(201,106,16,.06)}
+.pillar-icon{font-size:22px;flex-shrink:0;margin-top:1px}
+.pillar-title{font-family:var(--head);font-size:14px;font-weight:700;color:#FFF8F0;margin-bottom:3px}
+.pillar-desc{font-size:13px;color:rgba(255,248,240,.45);line-height:1.6}
+
+/* story photo cells */
+.story-img-cell{border-radius:20px;overflow:hidden;background:var(--surface2);border:1px solid var(--border);min-height:220px;position:relative}
+.story-img-cell img{width:100%;height:100%;object-fit:cover;display:block}
+.story-img-ph{width:100%;height:100%;min-height:220px;display:flex;align-items:center;justify-content:center;font-size:44px;opacity:.25;background:var(--bg2)}
+
+/* hours card — warm caramel tinted */
+.story-hours-cell{
+  background:linear-gradient(135deg,var(--choc),var(--choc2));
+  border:1px solid rgba(201,106,16,.2);
+  border-radius:20px;padding:28px 30px;
+}
+.hours-label{font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--caramel2);margin-bottom:14px}
+.hours-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,248,240,.06);font-size:13.5px}
+.hours-row:last-child{border:none}
+.hours-row .day{color:rgba(255,248,240,.45);font-size:13px}
+.hours-row .time{color:#FFF8F0;font-weight:600;font-family:var(--head);font-size:12px}
+.hours-today{background:rgba(77,235,163,.08);border-radius:8px;padding:9px 10px;margin:-1px -4px;border:1px solid rgba(77,235,163,.2)}
+.hours-today .day{color:#4DEBA3}
+.hours-today .time{color:#4DEBA3}
+
+/* ════════════════════════════════════════
+   CONTACT
+════════════════════════════════════════ */
+#contact{background:var(--bg2);border-top:1px solid var(--border)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:12px;align-items:start}
+.contact-info-col{display:flex;flex-direction:column;gap:10px}
+.contact-card{background:var(--surface);border:1.5px solid var(--border);border-radius:18px;padding:26px 28px;text-decoration:none;display:block;transition:border-color .2s,box-shadow .2s;box-shadow:0 1px 8px rgba(30,14,6,.04)}
+.contact-card:hover{border-color:var(--border-hi);box-shadow:0 4px 20px rgba(30,14,6,.08)}
+.contact-card-label{font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--caramel);margin-bottom:8px}
+.contact-card-val{font-size:16px;color:var(--text);font-weight:500;text-decoration:none;transition:color .2s;display:block}
+a.contact-card-val:hover{color:var(--caramel)}
+.wa-card{background:linear-gradient(135deg,rgba(37,211,102,.07),rgba(37,211,102,.02));border-color:rgba(37,211,102,.2) !important}
+.wa-card:hover{border-color:rgba(37,211,102,.4) !important}
+.wa-val{color:#1A9C5A !important;display:flex;align-items:center;gap:10px;font-weight:700}
+.map-link{display:flex;align-items:center;justify-content:center;margin-top:12px;padding:13px;border-radius:10px;background:var(--bg2);border:1.5px solid var(--border);font-size:12.5px;color:var(--muted);text-decoration:none;font-family:var(--head);font-weight:600;letter-spacing:.5px;transition:all .2s}
+.map-link:hover{border-color:var(--caramel);color:var(--caramel)}
+
+/* contact form */
+.contact-form-cell{background:var(--surface);border:1.5px solid var(--border);border-radius:20px;padding:44px 40px;box-shadow:0 2px 16px rgba(30,14,6,.05)}
+.form-heading{font-family:var(--display);font-size:52px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;color:var(--choc)}
+.form-sub{font-size:14px;color:var(--muted);margin-bottom:30px}
+.fg{display:flex;flex-direction:column;gap:7px;margin-bottom:13px}
+.fg label{font-family:var(--head);font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.fg input,.fg textarea{
+  background:var(--bg);border:1.5px solid var(--border);border-radius:10px;
+  padding:13px 16px;font-size:14px;color:var(--text);
+  font-family:var(--body);outline:none;width:100%;
+  transition:border-color .2s,background .2s;
+}
+.fg input:focus,.fg textarea:focus{border-color:var(--caramel);background:var(--surface)}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(30,14,6,.25)}
+.fg textarea{height:118px;resize:vertical}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.submit-btn{
+  width:100%;background:var(--choc);color:#FFF8F0;border:none;
+  padding:16px;border-radius:12px;font-family:var(--head);font-size:14px;
+  font-weight:700;cursor:pointer;letter-spacing:.5px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:all .2s var(--ease);
+}
+.submit-btn:hover{background:var(--choc2);box-shadow:0 12px 36px rgba(30,14,6,.25);transform:translateY(-2px)}
+
+/* ════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════ */
+footer{background:var(--choc);border-top:1px solid rgba(255,248,240,.06);padding:60px 5% 32px}
+.footer-top{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:48px;padding-bottom:44px;border-bottom:1px solid rgba(255,248,240,.07)}
+.footer-logo{font-family:var(--display);font-size:26px;letter-spacing:2px;text-transform:uppercase;color:#FFF8F0;text-decoration:none;display:block;margin-bottom:10px}
+.footer-logo sup{font-family:var(--head);font-size:10px;color:var(--caramel2);letter-spacing:1px}
+.footer-tagline{font-size:13px;color:rgba(255,248,240,.35);line-height:1.65;max-width:220px}
+.footer-col h4{font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--caramel2);margin-bottom:16px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col a{font-size:13.5px;color:rgba(255,248,240,.4);text-decoration:none;font-weight:400;transition:color .2s}
+.footer-col a:hover{color:var(--caramel2)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;flex-wrap:wrap;gap:10px}
+.footer-copy{font-size:12px;color:rgba(255,248,240,.18)}
+.footer-love{font-family:var(--display2);font-style:italic;font-size:14px;color:var(--caramel2);opacity:.6}
+
+/* ════════════════════════════════════════
+   REVEAL
+════════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.4s}
+
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+@keyframes slideUp{to{opacity:1;transform:translateY(0)}}
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════ */
+@media(max-width:1024px){
+  .hero-float-1,.hero-float-2{display:none}
+  .bento{grid-template-rows:260px 260px}
+  .story-bento{grid-template-columns:1fr}
+  .story-text-cell{grid-row:span 1}
+  .contact-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-center{display:none}
+  .nav-burger{display:flex}
+  section{padding:64px 5%}
+  footer{padding:48px 5% 28px}
+  #hero{padding:100px 5% 44px}
+  h1.hero-headline{font-size:clamp(60px,17vw,100px);letter-spacing:1.5px}
+  .hero-bottom{padding-top:32px;gap:18px}
+  .hero-desc{font-size:14px;max-width:100%}
+  .bento{grid-template-columns:1fr 1fr;grid-template-rows:190px 190px 190px}
+  .bento-cell:nth-child(1){grid-column:span 2}
+  .bento-cell:nth-child(2),.bento-cell:nth-child(3),.bento-cell:nth-child(4),.bento-cell:nth-child(5){grid-column:span 1}
+  .menu-header{flex-direction:column;align-items:flex-start;gap:18px;margin-bottom:28px}
+  .menu-grid.active{grid-template-columns:1fr}
+  .story-text-cell{padding:32px 28px}
+  .story-text-cell::before{font-size:140px}
+  .fg-row{grid-template-columns:1fr}
+  .contact-form-cell{padding:28px 22px}
+  .footer-top{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:6px}
+  .section-heading{margin-bottom:36px}
+}
+@media(max-width:480px){
+  #hero{padding:88px 5% 36px}
+  h1.hero-headline{font-size:clamp(56px,18vw,80px);letter-spacing:1px}
+  .hero-eyebrow{font-size:10px;letter-spacing:2px}
+  .hero-ctas{flex-direction:column}
+  .btn-primary,.btn-outline-light{width:100%;justify-content:center;padding:16px 24px;font-size:14px}
+  .bento{grid-template-columns:1fr;grid-template-rows:repeat(5,210px)}
+  .bento-cell:nth-child(1){grid-column:span 1}
+  .menu-tabs{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .menu-tabs::-webkit-scrollbar{display:none}
+  .menu-tab{flex-shrink:0}
+  .section-heading{font-size:clamp(44px,15vw,64px);letter-spacing:1px;margin-bottom:28px}
+  .story-heading{font-size:clamp(40px,13vw,60px)}
+  .story-text-cell{padding:28px 22px}
+  .contact-card{padding:20px 18px}
+  .form-heading{font-size:42px}
+  .footer-top{gap:32px}
+}
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mob" id="mob">
+  <button class="mob-x" onclick="toggleMob()">✕</button>
+  <a href="#gallery" onclick="toggleMob()">Gallery</a>
+  <a href="#menu" onclick="toggleMob()">Menu</a>
+  <a href="#story" onclick="toggleMob()">Story</a>
+  <a href="#contact" onclick="toggleMob()" style="color:var(--caramel2)">Visit</a>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">W4D <sup>FREEPORT</sup></a>
+  <div class="nav-center">
+    <a href="#gallery">Gallery</a>
+    <a href="#menu">Menu</a>
+    <a href="#story">Story</a>
+    <a href="#contact" class="nav-pill">Visit Us</a>
+  </div>
+  <button class="nav-burger" onclick="toggleMob()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+
+  <div class="hero-float hero-float-1">
+    <div class="float-num">4.9</div>
+    <div class="float-label">★ Uber Eats Rating</div>
+  </div>
+  <div class="hero-float hero-float-2">
+    <div class="live-badge"><div class="live-dot"></div>Open on the Nautical Mile</div>
+  </div>
+
+  <div style="position:relative;z-index:2">
+    <div class="hero-eyebrow"><div class="eyebrow-dot"></div>Freeport, New York</div>
+    <h1 class="hero-headline">
+      <span class="line"><span>Life tastes</span></span>
+      <span class="line"><span><em>sweeter</em></span></span>
+      <span class="line"><span>in <span class="accent-fill">Freeport</span></span></span>
+    </h1>
+  </div>
+
+  <div class="hero-bottom">
+    <p class="hero-desc">Handcrafted shakes, crepes, brownies and cookies — made daily by four siblings on the Nautical Mile. No shortcuts. Ever.</p>
+    <div class="hero-ctas">
+      <a href="#menu" class="btn-primary">See the Menu <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7H13M7 1L13 7L7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="https://www.doordash.com/store/whats-4-dessert-freeport-34781631/" target="_blank" class="btn-outline-light">Order Delivery</a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap"><div class="marquee-track" id="marqueeTrack"></div></div>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="reveal">
+    <div class="section-label">The Goods</div>
+    <h2 class="section-heading">Every bite is<br><span class="pop">a whole moment</span></h2>
+  </div>
+  <div class="bento" id="bentoGrid">
+    <div class="bento-cell shimmer"></div><div class="bento-cell shimmer"></div>
+    <div class="bento-cell shimmer"></div><div class="bento-cell shimmer"></div>
+    <div class="bento-cell shimmer"></div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="menu-header">
+    <div>
+      <div class="section-label reveal">What We Make</div>
+      <h2 class="section-heading reveal" style="margin-bottom:0">The <span class="accent">Menu</span></h2>
+    </div>
+    <div class="menu-tabs reveal" id="menuTabs"></div>
+  </div>
+  <div id="menuPanels">
+    <div class="menu-grid active">
+      <div class="menu-card shimmer" style="height:340px"></div>
+      <div class="menu-card shimmer" style="height:340px"></div>
+      <div class="menu-card shimmer" style="height:340px"></div>
+      <div class="menu-card shimmer" style="height:340px"></div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="reveal"><div class="section-label">Who We Are</div></div>
+  <div class="story-bento">
+    <div class="story-text-cell reveal">
+      <h2 class="story-heading">Four siblings.<br><span>One sweet dream.</span></h2>
+      <p class="story-body">What's 4 Dessert started with a family who believed Freeport deserved something extraordinary. Not a chain. Not a franchise. A place where every shake, crepe, and brownie carries the same love you'd give your own family.</p>
+      <div class="pillars">
+        <div class="pillar"><div class="pillar-icon">🍫</div><div><div class="pillar-title">Never Scrimp on Quality</div><p class="pillar-desc">Real ingredients. Generous portions. That drizzle? Never stingy.</p></div></div>
+        <div class="pillar"><div class="pillar-icon">❤️</div><div><div class="pillar-title">Made with Actual Love</div><p class="pillar-desc">Every item crafted with the same care we'd give family.</p></div></div>
+        <div class="pillar"><div class="pillar-icon">🌊</div><div><div class="pillar-title">Freeport to the Core</div><p class="pillar-desc">Right on Woodcleft Ave. Proud of it.</p></div></div>
+      </div>
+    </div>
+    <div class="story-img-cell reveal d1" id="storyImg1"><div class="story-img-ph shimmer"></div></div>
+    <div class="story-hours-cell reveal d2">
+      <div class="hours-label">Hours</div>
+      <div id="hoursRows"><div style="color:rgba(255,248,240,.3);font-size:13px;padding:8px 0">Loading…</div></div>
+    </div>
+    <div class="story-img-cell reveal d3" id="storyImg2"><div class="story-img-ph shimmer"></div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal">
+    <div class="section-label">Find Us</div>
+    <h2 class="section-heading">Come say <span class="accent">hello</span></h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info-col">
+      <div class="contact-card reveal d1">
+        <div class="contact-card-label">Address</div>
+        <a href="https://maps.google.com/?q=144+Woodcleft+Ave+Freeport+NY" target="_blank" class="contact-card-val">144 B Woodcleft Ave, Freeport NY 11520</a>
+        <a href="https://maps.google.com/?q=144+Woodcleft+Ave+Freeport+NY" target="_blank" class="map-link">📍 Open in Google Maps →</a>
+      </div>
+      <div class="contact-card reveal d2">
+        <div class="contact-card-label">Phone</div>
+        <a href="tel:5169987618" class="contact-card-val">(516) 998-7618</a>
+      </div>
+      <a href="https://wa.me/15169987618" target="_blank" class="contact-card wa-card reveal d3">
+        <div class="contact-card-label">WhatsApp</div>
+        <div class="contact-card-val wa-val">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#1A9C5A"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+          Message us on WhatsApp
+        </div>
+      </a>
+    </div>
+    <div class="contact-form-cell reveal d2">
+      <div class="form-heading">Drop us a line</div>
+      <p class="form-sub">Questions, catering, or just want to say hi.</p>
+      <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+        <div class="fg-row">
+          <div class="fg"><label>Name</label><input type="text" name="name" placeholder="Your name" required></div>
+          <div class="fg"><label>Email</label><input type="email" name="email" placeholder="you@email.com" required></div>
+        </div>
+        <div class="fg"><label>Subject</label><input type="text" name="subject" placeholder="e.g. Catering enquiry"></div>
+        <div class="fg"><label>Message</label><textarea name="message" placeholder="What's on your mind?" required></textarea></div>
+        <button type="submit" class="submit-btn">Send it <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <a href="#hero" class="footer-logo">What's 4 Dessert <sup>NY</sup></a>
+      <p class="footer-tagline">Handcrafted desserts on Freeport's Nautical Mile. Family-made since day one.</p>
+    </div>
+    <div class="footer-col"><h4>Menu</h4><ul id="footerMenuLinks"><li><a href="#menu">View Menu</a></li></ul></div>
+    <div class="footer-col"><h4>Order Online</h4><ul>
+      <li><a href="https://www.ubereats.com/store/whats-4-dessert/1JiuoK5fU523Q0uIFOxRyQ" target="_blank">Uber Eats</a></li>
+      <li><a href="https://www.doordash.com/store/whats-4-dessert-freeport-34781631/" target="_blank">DoorDash</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Contact</h4><ul>
+      <li><a href="tel:5169987618">(516) 998-7618</a></li>
+      <li><a href="https://maps.google.com/?q=144+Woodcleft+Ave+Freeport+NY" target="_blank">144 B Woodcleft Ave</a></li>
+      <li><a href="#contact">Send a Message</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 What's 4 Dessert. All rights reserved.</p>
+    <p class="footer-love">Made with ❤️ in Freeport, NY</p>
+  </div>
+</footer>
+
+<script>
+// NAV
+window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('solid', scrollY > 60));
+function toggleMob() { document.getElementById('mob').classList.toggle('open'); }
+
+// SCROLL REVEAL
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } });
+}, { threshold:.08, rootMargin:'0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+// MARQUEE
+const MQ = ['Milkshakes','Dubai Chocolate','Fresh Crepes','Warm Brownies','Cookies Daily','Nautical Mile','Freeport NY','Family Made','Order on Uber Eats','4.9 Stars'];
+const track = document.getElementById('marqueeTrack');
+const html = MQ.map(t=>`<span class="marquee-item">${t}<span class="dot">✦</span></span>`).join('');
+track.innerHTML = html + html;
+
+// FALLBACK DATA
+const FB = {
+  menu:[
+    {name:"Classic Chocolate Madness",description:"Rich chocolate shake loaded with brownie chunks, chocolate drizzle, and whipped cream.",price:"$12",category:"Milkshakes",emoji:"🍫"},
+    {name:"Strawberry Dream",description:"Fresh strawberry shake with a vanilla bean swirl, topped sky-high.",price:"$11",category:"Milkshakes",emoji:"🍓"},
+    {name:"Dubai Chocolate Shake",description:"Our viral Dubai chocolate-inspired shake — pistachio, kataifi, and pure decadence.",price:"$14",category:"Milkshakes",emoji:"✨"},
+    {name:"Cookies & Cream",description:"Oreo-blended vanilla shake with crushed cookies and a cream swirl.",price:"$11",category:"Milkshakes",emoji:"🍪"},
+    {name:"Nutella Banana",description:"Warm crepe filled with Nutella, fresh banana slices, and powdered sugar.",price:"$10",category:"Crepes",emoji:"🍌"},
+    {name:"Strawberry Cheesecake",description:"Cream cheese, fresh strawberries, graham crumble, and berry drizzle.",price:"$11",category:"Crepes",emoji:"🍓"},
+    {name:"Lotus Biscoff",description:"Biscoff spread, caramelized biscuits, and vanilla cream.",price:"$12",category:"Crepes",emoji:"🍂"},
+    {name:"S'mores Crepe",description:"Chocolate, marshmallow, graham cracker, toasted marshmallow.",price:"$11",category:"Crepes",emoji:"🔥"},
+    {name:"Classic Fudge Brownie",description:"Dense, gooey, and rich. Served warm.",price:"$6",category:"Brownies",emoji:"🟫"},
+    {name:"Brownie Sundae",description:"Warm brownie topped with vanilla ice cream, hot fudge, and caramel drizzle.",price:"$10",category:"Brownies",emoji:"🍨"},
+    {name:"Blondie",description:"Brown butter blondie with white chocolate chips.",price:"$6",category:"Brownies",emoji:"⭐"},
+    {name:"Brownie Shake Combo",description:"A shake of your choice paired with our signature warm brownie.",price:"$18",category:"Brownies",emoji:"🤝"},
+    {name:"Chocolate Chip OG",description:"Baked fresh daily. Crispy edge, gooey centre.",price:"$3.50",category:"Cookies",emoji:"🍪"},
+    {name:"Double Chocolate",description:"Cocoa dough loaded with dark and milk chocolate chips.",price:"$4",category:"Cookies",emoji:"🍫"},
+    {name:"Snickerdoodle",description:"Cinnamon-sugar coated softness.",price:"$3.50",category:"Cookies",emoji:"🌀"},
+    {name:"Cookie Butter",description:"Inspired by Biscoff — buttery, spiced, completely addictive.",price:"$4.50",category:"Cookies",emoji:"🧡"},
+  ],
+  hours:[
+    {day:"Monday",hours:"Closed"},{day:"Tuesday",hours:"5:00 PM – 11:00 PM"},
+    {day:"Wednesday",hours:"5:00 PM – 11:00 PM"},{day:"Thursday",hours:"5:00 PM – 11:00 PM"},
+    {day:"Friday",hours:"5:00 PM – 1:00 AM"},{day:"Saturday",hours:"5:00 PM – 1:00 AM"},
+    {day:"Sunday",hours:"4:00 PM – 11:00 PM"},
+  ],
+  gallery:[],
+};
+
+async function loadContent() {
+  try { const r = await fetch('/api/content'); if(!r.ok) throw 0; return await r.json(); }
+  catch(e) { console.warn('Fallback mode'); return FB; }
+}
+
+function slugify(s){ return s.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,''); }
+
+function renderGallery(gallery) {
+  const grid = document.getElementById('bentoGrid');
+  const labels = ['Hero Shot','Milkshake','Crepe','Brownie','The Spot'];
+  const icons  = ['🍫','🍓','🧁','🍪','🌊'];
+  grid.innerHTML = Array.from({length:5},(_,i) => {
+    const item = gallery[i]||null;
+    return `<div class="bento-cell reveal d${i+1}">
+      ${item?.image
+        ? `<img src="${item.image}" alt="${item.label||''}" loading="lazy"><div class="bento-overlay"><span class="bento-caption">${item.caption||item.label||''}</span></div>`
+        : `<div class="bento-ph"><div class="bento-ph-icon">${icons[i]}</div><div class="bento-ph-text">${labels[i]}</div></div>`
+      }
+    </div>`;
+  }).join('');
+  document.querySelectorAll('.reveal:not(.in)').forEach(el=>ro.observe(el));
+}
+
+function renderStoryPhotos(gallery) {
+  const ph = `<div class="story-img-ph">🍫</div>`;
+  document.getElementById('storyImg1').innerHTML = gallery[0]?.image ? `<img src="${gallery[0].image}" alt="" loading="lazy" style="width:100%;height:100%;min-height:240px;object-fit:cover">` : ph;
+  document.getElementById('storyImg2').innerHTML = gallery[1]?.image ? `<img src="${gallery[1].image}" alt="" loading="lazy" style="width:100%;height:100%;min-height:220px;object-fit:cover">` : ph;
+}
+
+function renderMenu(items) {
+  const cats=[], grouped={};
+  items.forEach(item => { if(!grouped[item.category]){grouped[item.category]=[];cats.push(item.category);} grouped[item.category].push(item); });
+  document.getElementById('menuTabs').innerHTML = cats.map((c,i)=>`<button class="menu-tab${i===0?' active':''}" data-tab="${slugify(c)}">${c}</button>`).join('');
+  document.getElementById('menuPanels').innerHTML = cats.map((c,i)=>`
+    <div class="menu-grid${i===0?' active':''}" id="panel_${slugify(c)}">
+      ${grouped[c].map(item=>`
+        <div class="menu-card reveal">
+          <div class="menu-img">${item.image?`<img src="${item.image}" alt="${item.name}" loading="lazy">`:`<div class="menu-img-emoji">${item.emoji}</div>`}</div>
+          <div class="menu-body">
+            <div class="menu-name">${item.name}</div>
+            <p class="menu-desc">${item.description}</p>
+            <div class="menu-footer"><div class="menu-price">${item.price}</div><div class="menu-badge">${c.replace(/s$/,'')}</div></div>
+          </div>
+        </div>`).join('')}
+    </div>`).join('');
+  document.getElementById('footerMenuLinks').innerHTML = cats.map(c=>`<li><a href="#menu">${c}</a></li>`).join('');
+  document.getElementById('menuTabs').addEventListener('click', e => {
+    const tab = e.target.closest('.menu-tab'); if(!tab) return;
+    document.querySelectorAll('.menu-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.menu-grid').forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel_'+tab.dataset.tab)?.classList.add('active');
+    document.querySelectorAll('.reveal:not(.in)').forEach(el=>ro.observe(el));
+  });
+  document.querySelectorAll('.reveal:not(.in)').forEach(el=>ro.observe(el));
+}
+
+function renderHours(hours) {
+  const today = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][new Date().getDay()];
+  document.getElementById('hoursRows').innerHTML = hours.map(h=>`
+    <div class="hours-row${h.day===today?' hours-today':''}">
+      <span class="day">${h.day}${h.day===today?'<small style="color:#4DEBA3;font-size:10px;margin-left:6px;font-family:var(--head);font-weight:700"> TODAY</small>':''}</span>
+      <span class="time">${h.hours}</span>
+    </div>`).join('');
+}
+
+loadContent().then(data => {
+  renderGallery(data.gallery||[]);
+  renderStoryPhotos(data.gallery||[]);
+  renderMenu(data.menu||FB.menu);
+  renderHours(data.hours||FB.hours);
+});
+
+document.querySelector('form')?.addEventListener('submit',function(){
+  const b=this.querySelector('.submit-btn'); b.textContent='Sending…'; b.style.opacity='.7';
+});
+</script>
+</body>
+</html>
