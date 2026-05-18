@@ -124,10 +124,11 @@ nav.solid .nav-burger span{background:var(--brown)}
   width:100%;height:100%;
   object-fit:cover;
   display:block;
+  position:relative;z-index:0;
 }
 /* dark + pink overlay so text reads cleanly */
 .hero-video-overlay{
-  position:absolute;inset:0;
+  position:absolute;inset:0;z-index:2;
   background:linear-gradient(
     to bottom,
     rgba(61,26,10,0.15) 0%,
@@ -138,7 +139,7 @@ nav.solid .nav-burger span{background:var(--brown)}
 
 /* placeholder shown before video is set */
 .hero-video-placeholder{
-  position:absolute;inset:0;
+  position:absolute;inset:0;z-index:1;
   background:linear-gradient(135deg, var(--pink) 0%, #FF6BAA 40%, var(--brown) 100%);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:16px;
@@ -739,7 +740,7 @@ footer::after{
       preload="auto"
     ></video>
     <!-- shown when no video src is set -->
-   <div class="hero-video-placeholder" id="heroPlaceholder" style="display:none">
+    <div class="hero-video-placeholder" id="heroPlaceholder">
       <div class="placeholder-icon">🎬</div>
       <div class="placeholder-text">Drop your video file here</div>
     </div>
@@ -911,11 +912,11 @@ function toggleMob() { document.getElementById('mob').classList.toggle('open'); 
 // VIDEO — show placeholder if no src set
 const vid = document.getElementById('heroVideo');
 const placeholder = document.getElementById('heroPlaceholder');
-if (!vid.src || vid.src === window.location.href) {
-  placeholder.style.display = 'flex';
-} else {
+if (vid && vid.getAttribute('src') && vid.getAttribute('src').length > 0) {
   placeholder.style.display = 'none';
   vid.play().catch(()=>{});
+} else {
+  placeholder.style.display = 'flex';
 }
 
 // SCROLL REVEAL
