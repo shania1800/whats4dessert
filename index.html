@@ -106,142 +106,166 @@ nav.solid .nav-burger span{background:var(--brown)}
 .mob-x{position:absolute;top:24px;right:5%;background:none;border:none;color:rgba(255,255,255,0.6);font-size:28px;cursor:pointer}
 
 /* ════════════════════════════════════
-   HERO — VIDEO FULLSCREEN
+   HERO — SPLIT LAYOUT (text left, video card right)
 ════════════════════════════════════ */
 #hero{
-  position:relative;
-  width:100%;height:100svh;
-  overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
+  min-height:100svh;
+  background:var(--brown);
+  display:grid;
+  grid-template-columns:1fr 420px;
+  align-items:center;
+  gap:0;
+  padding:120px 5% 80px;
+  position:relative;overflow:hidden;
 }
 
-/* video fills the frame */
-.hero-video-wrap{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-}
-.hero-video-wrap video{
-  width:100%;height:100%;
-  object-fit:cover;
-  display:block;
-  position:relative;z-index:0;
-}
-/* dark + pink overlay so text reads cleanly */
-.hero-video-overlay{
-  position:absolute;inset:0;z-index:2;
-  background:linear-gradient(
-    to bottom,
-    rgba(61,26,10,0.15) 0%,
-    rgba(255,62,138,0.25) 40%,
-    rgba(61,26,10,0.75) 100%
-  );
+/* waffle grid texture */
+#hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.03) 40px,rgba(255,255,255,0.03) 41px),
+    repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(255,255,255,0.03) 40px,rgba(255,255,255,0.03) 41px);
+  pointer-events:none;
 }
 
-/* placeholder shown before video is set */
-.hero-video-placeholder{
-  position:absolute;inset:0;z-index:1;
-  background:linear-gradient(135deg, var(--pink) 0%, #FF6BAA 40%, var(--brown) 100%);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:16px;
-}
-.placeholder-icon{font-size:72px;opacity:.5}
-.placeholder-text{
-  font-family:var(--head);font-size:13px;font-weight:700;
-  letter-spacing:2px;text-transform:uppercase;
-  color:rgba(255,255,255,.5);
-}
-/* hide placeholder once video loads */
-.hero-video-wrap:has(video[src]) .hero-video-placeholder{display:none}
+/* warm glow orbs */
+.hero-orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;animation:morph 10s ease-in-out infinite alternate}
+.hero-orb-1{width:560px;height:560px;background:radial-gradient(circle,rgba(255,62,138,0.2),transparent 70%);top:-80px;left:-80px;animation-duration:9s}
+.hero-orb-2{width:380px;height:380px;background:radial-gradient(circle,rgba(201,106,16,0.15),transparent 70%);bottom:60px;right:520px;animation-duration:12s;animation-delay:-4s}
+@keyframes morph{0%{border-radius:60% 40% 30% 70%/60% 30% 70% 40%}50%{border-radius:30% 60% 70% 40%/50% 60% 30% 60%}100%{border-radius:50% 60% 30% 60%/40% 70% 60% 30%}}
 
-/* hero content sits above overlay */
-.hero-content{
+/* ── LEFT: text content ── */
+.hero-text{
   position:relative;z-index:2;
-  text-align:center;padding:0 5%;
-  display:flex;flex-direction:column;align-items:center;
+  display:flex;flex-direction:column;
+  padding-right:48px;
 }
 
 .hero-badge{
   display:inline-flex;align-items:center;gap:8px;
-  background:rgba(255,255,255,0.15);
-  border:1px solid rgba(255,255,255,0.3);
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.2);
   border-radius:100px;padding:8px 18px;
   font-family:var(--head);font-size:11px;font-weight:700;
   letter-spacing:2.5px;text-transform:uppercase;color:var(--white);
-  backdrop-filter:blur(8px);margin-bottom:20px;
+  backdrop-filter:blur(8px);margin-bottom:24px;width:fit-content;
   opacity:0;transform:translateY(16px);animation:fadeUp .6s .2s var(--ease) forwards;
 }
-.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--white);animation:pdot 2s infinite}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--pink);animation:pdot 2s infinite}
 @keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.6)}}
 
 .hero-name{
   font-family:var(--display);
-  font-size:clamp(72px,16vw,200px);
-  letter-spacing:4px;text-transform:uppercase;
+  font-size:clamp(64px,8vw,128px);
+  letter-spacing:3px;text-transform:uppercase;
   color:var(--white);line-height:.88;
-  text-shadow:0 4px 40px rgba(61,26,10,0.4);
   opacity:0;transform:translateY(30px);animation:fadeUp .9s .35s var(--ease) forwards;
 }
-/* the "4" pops in pink outline */
 .hero-name .four{
   -webkit-text-fill-color:transparent;
-  -webkit-text-stroke:3px var(--white);
+  -webkit-text-stroke:3px var(--pink);
   color:transparent;
 }
 
 .hero-tagline{
-  font-family:var(--head);font-size:clamp(13px,2vw,17px);font-weight:400;
-  color:rgba(255,255,255,0.75);letter-spacing:.5px;
-  margin-top:16px;line-height:1.6;max-width:480px;
+  font-family:var(--head);font-size:16px;font-weight:400;
+  color:rgba(255,255,255,0.65);letter-spacing:.3px;
+  margin-top:20px;line-height:1.7;max-width:440px;
   opacity:0;transform:translateY(16px);animation:fadeUp .7s .55s var(--ease) forwards;
 }
 
 .hero-ctas{
-  display:flex;gap:12px;flex-wrap:wrap;justify-content:center;
-  margin-top:32px;
+  display:flex;gap:12px;flex-wrap:wrap;
+  margin-top:36px;
   opacity:0;transform:translateY(16px);animation:fadeUp .7s .7s var(--ease) forwards;
 }
 .btn-white{
-  background:var(--white);color:var(--pink);
+  background:var(--white);color:var(--pink-dark);
   padding:15px 32px;border-radius:100px;
   font-family:var(--head);font-size:13px;font-weight:700;
   text-decoration:none;letter-spacing:.3px;
   display:inline-flex;align-items:center;gap:8px;
   transition:all .2s var(--ease);
-  box-shadow:0 8px 32px rgba(0,0,0,0.15);
+  box-shadow:0 8px 32px rgba(0,0,0,0.2);
 }
-.btn-white:hover{background:var(--pink-pale);transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,0,0,.2)}
+.btn-white:hover{background:var(--pink-pale);transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,0,0,.25)}
 .btn-outline-white{
-  border:2px solid rgba(255,255,255,.5);color:var(--white);
+  border:2px solid rgba(255,255,255,.4);color:var(--white);
   padding:15px 32px;border-radius:100px;
   font-family:var(--head);font-size:13px;font-weight:500;
   text-decoration:none;display:inline-flex;align-items:center;gap:8px;
   transition:all .2s var(--ease);backdrop-filter:blur(8px);
 }
-.btn-outline-white:hover{border-color:var(--white);background:rgba(255,255,255,.12)}
+.btn-outline-white:hover{border-color:var(--pink);background:rgba(255,62,138,.1)}
 
-/* floating stats — bottom corners */
-.hero-stat-left,.hero-stat-right{
-  position:absolute;bottom:40px;
-  background:rgba(255,255,255,0.12);
-  border:1px solid rgba(255,255,255,0.2);
-  border-radius:14px;padding:14px 20px;
-  backdrop-filter:blur(12px);
-  opacity:0;animation:fadeUp .7s .9s var(--ease) forwards;
-  z-index:2;
+/* hero stats row */
+.hero-stats-row{
+  display:flex;gap:32px;margin-top:48px;padding-top:32px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  opacity:0;transform:translateY(16px);animation:fadeUp .7s .85s var(--ease) forwards;
 }
-.hero-stat-left{left:5%}
-.hero-stat-right{right:5%}
-.stat-num{font-family:var(--display);font-size:36px;color:var(--white);line-height:1;letter-spacing:1px}
-.stat-label{font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:2px}
+.hero-stat{}
+.stat-num{font-family:var(--display);font-size:40px;color:var(--pink);line-height:1;letter-spacing:1px}
+.stat-label{font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:3px}
+
+/* ── RIGHT: video card ── */
+.hero-video-wrap{
+  position:relative;z-index:2;
+  opacity:0;transform:translateY(24px) scale(0.97);
+  animation:fadeUp .9s .5s var(--ease) forwards;
+}
+.hero-video-card{
+  position:relative;
+  width:100%;
+  aspect-ratio:9/16;
+  border-radius:28px;
+  overflow:hidden;
+  background:var(--brown2);
+  box-shadow:
+    0 0 0 1px rgba(255,62,138,0.3),
+    0 0 40px rgba(255,62,138,0.2),
+    0 32px 80px rgba(0,0,0,0.5);
+}
+.hero-video-card video{
+  width:100%;height:100%;
+  object-fit:cover;display:block;
+  position:relative;z-index:0;
+}
+/* subtle pink glow ring around the card */
+.hero-video-card::before{
+  content:'';
+  position:absolute;inset:-2px;
+  border-radius:30px;
+  background:linear-gradient(135deg,rgba(255,62,138,0.5),rgba(255,107,170,0.1),rgba(255,62,138,0.4));
+  z-index:-1;
+  animation:cardborder 4s ease-in-out infinite alternate;
+}
+@keyframes cardborder{
+  from{opacity:.6}
+  to{opacity:1}
+}
+/* "playing now" badge on the card */
+.video-playing-badge{
+  position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+  background:rgba(255,255,255,0.15);backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.25);
+  border-radius:100px;padding:8px 18px;
+  display:flex;align-items:center;gap:8px;
+  font-family:var(--head);font-size:11px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;color:var(--white);
+  z-index:3;white-space:nowrap;
+}
+.playing-dot{width:6px;height:6px;border-radius:50%;background:var(--pink);animation:pdot 1.2s infinite}
 
 /* scroll cue */
 .hero-scroll{
-  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:6px;z-index:2;
+  position:absolute;bottom:32px;left:5%;
+  display:flex;align-items:center;gap:10px;z-index:2;
   opacity:0;animation:fadeUp 1s 1.1s var(--ease) forwards;
 }
-.scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,rgba(255,255,255,.6),transparent);animation:scrollpulse 2s infinite}
-@keyframes scrollpulse{0%,100%{opacity:.3}50%{opacity:1}}
+.scroll-line{width:40px;height:1px;background:linear-gradient(to right,rgba(255,255,255,.6),transparent);animation:scrollpulse 2s infinite}
+.scroll-text{font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4)}
+@keyframes scrollpulse{0%,100%{opacity:.3;width:30px}50%{opacity:1;width:50px}}
 
 /* ════════════════════════════════════
    MARQUEE
@@ -454,7 +478,8 @@ footer{background:var(--brown);border-top:none;padding:60px 5% 32px}
    RESPONSIVE
 ════════════════════════════════════ */
 @media(max-width:1024px){
-  .hero-stat-left,.hero-stat-right{display:none}
+  #hero{grid-template-columns:1fr 340px;gap:0;padding:120px 5% 60px}
+  .hero-name{font-size:clamp(56px,7vw,96px)}
   .bento{grid-template-rows:260px 260px}
   .story-bento{grid-template-columns:1fr}
   .story-text-cell{grid-row:span 1}
@@ -462,13 +487,23 @@ footer{background:var(--brown);border-top:none;padding:60px 5% 32px}
   .footer-top{grid-template-columns:1fr 1fr}
 }
 @media(max-width:768px){
+  /* hero stacks vertically on mobile */
+  #hero{
+    grid-template-columns:1fr;
+    grid-template-rows:auto auto;
+    padding:100px 5% 60px;
+    gap:40px;
+    min-height:unset;
+  }
+  .hero-text{padding-right:0;text-align:center;align-items:center;order:2}
+  .hero-stats-row{justify-content:center}
+  .hero-video-wrap{width:100%;max-width:320px;margin:0 auto;order:1}
+  .hero-scroll{display:none}
   .nav-center{display:none}
   .nav-burger{display:flex}
   section{padding:64px 5%}
   footer{padding:48px 5% 28px}
-  #hero{height:100svh}
-  .hero-name{font-size:clamp(64px,18vw,110px);letter-spacing:2px}
-  .hero-scroll{display:none}
+  .hero-name{font-size:clamp(60px,14vw,100px)}
   .bento{grid-template-columns:1fr 1fr;grid-template-rows:190px 190px 190px}
   .bento-cell:nth-child(1){grid-column:span 2}
   .bento-cell:nth-child(2),.bento-cell:nth-child(3),.bento-cell:nth-child(4),.bento-cell:nth-child(5){grid-column:span 1}
@@ -721,50 +756,17 @@ footer::after{
   <button class="nav-burger" onclick="toggleMob()"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- HERO — VIDEO -->
+<!-- HERO — SPLIT LAYOUT -->
 <section id="hero">
-  <div class="hero-video-wrap">
-    <!--
-      TO ADD YOUR VIDEO:
-      1. Upload your video file to your project (e.g. /videos/hero.mp4)
-      2. Replace the src below with your file path
-      3. Keep autoplay muted playsinline loop — required for autoplay on mobile
-    -->
-    <video
-      id="heroVideo"
-      src="https://assets.mixkit.co/videos/50051/50051-720.mp4"
-      autoplay
-      muted
-      playsinline
-      loop
-      preload="auto"
-    ></video>
-    <!-- shown when no video src is set -->
-    <div class="hero-video-placeholder" id="heroPlaceholder">
-      <div class="placeholder-icon">🎬</div>
-      <div class="placeholder-text">Drop your video file here</div>
-    </div>
-    <div class="hero-video-overlay"></div>
-  </div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
 
-  <!-- floating stats -->
-  <div class="hero-stat-left">
-    <div class="stat-num">4.9★</div>
-    <div class="stat-label">Uber Eats</div>
-  </div>
-  <div class="hero-stat-right">
-    <div class="stat-num">100%</div>
-    <div class="stat-label">Handcrafted</div>
-  </div>
-
-  <!-- main content -->
-  <div class="hero-content">
+  <!-- LEFT: text -->
+  <div class="hero-text">
     <div class="hero-glow"></div>
     <div class="hero-badge"><div class="badge-dot"></div>Freeport's Favourite Dessert Spot</div>
-    <div class="hero-name">
-      What's <span class="four">4</span> Dessert
-    </div>
-    <p class="hero-tagline">Handcrafted shakes, crepes, brownies & cookies —<br>made daily by four siblings on the Nautical Mile.</p>
+    <div class="hero-name">What's <span class="four">4</span> Dessert</div>
+    <p class="hero-tagline">Handcrafted shakes, crepes, brownies & cookies — made daily by four siblings on the Nautical Mile.</p>
     <div class="hero-ctas">
       <a href="#menu" class="btn-white">
         See the Menu
@@ -772,9 +774,36 @@ footer::after{
       </a>
       <a href="https://www.doordash.com/store/whats-4-dessert-freeport-34781631/" target="_blank" class="btn-outline-white">Order Delivery</a>
     </div>
+    <div class="hero-stats-row">
+      <div class="hero-stat"><div class="stat-num">4.9★</div><div class="stat-label">Uber Eats</div></div>
+      <div class="hero-stat"><div class="stat-num">4</div><div class="stat-label">Siblings</div></div>
+      <div class="hero-stat"><div class="stat-num">100%</div><div class="stat-label">Handcrafted</div></div>
+    </div>
   </div>
 
-  <div class="hero-scroll"><div class="scroll-line"></div></div>
+  <!-- RIGHT: vertical video card -->
+  <div class="hero-video-wrap">
+    <div class="hero-video-card">
+      <video
+        id="heroVideo"
+        src="https://l9tivnsfxv147vlk.public.blob.vercel-storage.com/intro.mp4"
+        autoplay
+        muted
+        playsinline
+        loop
+        preload="auto"
+      ></video>
+      <div class="video-playing-badge">
+        <div class="playing-dot"></div>
+        Watch us work
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Scroll</span>
+  </div>
 </section>
 
 <!-- MARQUEE -->
@@ -909,15 +938,9 @@ footer::after{
 window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('solid', scrollY > 80));
 function toggleMob() { document.getElementById('mob').classList.toggle('open'); }
 
-// VIDEO — show placeholder if no src set
+// VIDEO autoplay
 const vid = document.getElementById('heroVideo');
-const placeholder = document.getElementById('heroPlaceholder');
-if (vid && vid.getAttribute('src') && vid.getAttribute('src').length > 0) {
-  placeholder.style.display = 'none';
-  vid.play().catch(()=>{});
-} else {
-  placeholder.style.display = 'flex';
-}
+if (vid) vid.play().catch(()=>{});
 
 // SCROLL REVEAL
 const ro = new IntersectionObserver(entries => {
@@ -930,25 +953,45 @@ const MQ = ['Milkshakes','Dubai Chocolate','Fresh Crepes','Warm Brownies','Cooki
 const track = document.getElementById('marqueeTrack');
 track.innerHTML = [...MQ,...MQ].map(t=>`<span class="marquee-item">${t}<span class="marquee-dot">✦</span></span>`).join('');
 
-// FALLBACK DATA
+// FALLBACK DATA — Unsplash images for each menu item (free, commercial use)
 const FB = {
   menu:[
-    {name:"Classic Chocolate Madness",description:"Rich chocolate shake loaded with brownie chunks, chocolate drizzle, and whipped cream.",price:"$12",category:"Milkshakes",emoji:"🍫"},
-    {name:"Strawberry Dream",description:"Fresh strawberry shake with a vanilla bean swirl, topped sky-high.",price:"$11",category:"Milkshakes",emoji:"🍓"},
-    {name:"Dubai Chocolate Shake",description:"Our viral Dubai chocolate-inspired shake — pistachio, kataifi, and pure decadence.",price:"$14",category:"Milkshakes",emoji:"✨"},
-    {name:"Cookies & Cream",description:"Oreo-blended vanilla shake with crushed cookies and a cream swirl.",price:"$11",category:"Milkshakes",emoji:"🍪"},
-    {name:"Nutella Banana",description:"Warm crepe filled with Nutella, fresh banana slices, and powdered sugar.",price:"$10",category:"Crepes",emoji:"🍌"},
-    {name:"Strawberry Cheesecake",description:"Cream cheese, fresh strawberries, graham crumble, and berry drizzle.",price:"$11",category:"Crepes",emoji:"🍓"},
-    {name:"Lotus Biscoff",description:"Biscoff spread, caramelized biscuits, and vanilla cream.",price:"$12",category:"Crepes",emoji:"🍂"},
-    {name:"S'mores Crepe",description:"Chocolate, marshmallow, graham cracker, toasted marshmallow.",price:"$11",category:"Crepes",emoji:"🔥"},
-    {name:"Classic Fudge Brownie",description:"Dense, gooey, and rich. Served warm.",price:"$6",category:"Brownies",emoji:"🟫"},
-    {name:"Brownie Sundae",description:"Warm brownie topped with vanilla ice cream, hot fudge, and caramel drizzle.",price:"$10",category:"Brownies",emoji:"🍨"},
-    {name:"Blondie",description:"Brown butter blondie with white chocolate chips.",price:"$6",category:"Brownies",emoji:"⭐"},
-    {name:"Brownie Shake Combo",description:"A shake of your choice paired with our signature warm brownie.",price:"$18",category:"Brownies",emoji:"🤝"},
-    {name:"Chocolate Chip OG",description:"Baked fresh daily. Crispy edge, gooey centre.",price:"$3.50",category:"Cookies",emoji:"🍪"},
-    {name:"Double Chocolate",description:"Cocoa dough loaded with dark and milk chocolate chips.",price:"$4",category:"Cookies",emoji:"🍫"},
-    {name:"Snickerdoodle",description:"Cinnamon-sugar coated softness.",price:"$3.50",category:"Cookies",emoji:"🌀"},
-    {name:"Cookie Butter",description:"Inspired by Biscoff — buttery, spiced, completely addictive.",price:"$4.50",category:"Cookies",emoji:"🧡"},
+    // MILKSHAKES
+    {name:"Classic Chocolate Madness",description:"Rich chocolate shake loaded with brownie chunks, chocolate drizzle, and whipped cream.",price:"$12",category:"Milkshakes",emoji:"🍫",
+     image:"https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=600&auto=format&fit=crop&q=80"},
+    {name:"Strawberry Dream",description:"Fresh strawberry shake with a vanilla bean swirl, topped sky-high.",price:"$11",category:"Milkshakes",emoji:"🍓",
+     image:"https://images.unsplash.com/photo-1688831908701-e2a10d99dfdc?w=600&auto=format&fit=crop&q=80"},
+    {name:"Dubai Chocolate Shake",description:"Our viral Dubai chocolate-inspired shake — pistachio, kataifi, and pure decadence.",price:"$14",category:"Milkshakes",emoji:"✨",
+     image:"https://images.unsplash.com/photo-1541658016709-82535e94bc69?w=600&auto=format&fit=crop&q=80"},
+    {name:"Cookies & Cream",description:"Oreo-blended vanilla shake with crushed cookies and a cream swirl.",price:"$11",category:"Milkshakes",emoji:"🍪",
+     image:"https://images.unsplash.com/photo-1615478503562-ec2d8aa0e24e?w=600&auto=format&fit=crop&q=80"},
+    // CREPES
+    {name:"Nutella Banana",description:"Warm crepe filled with Nutella, fresh banana slices, and powdered sugar.",price:"$10",category:"Crepes",emoji:"🍌",
+     image:"https://images.unsplash.com/photo-1519676867240-f03562e64548?w=600&auto=format&fit=crop&q=80"},
+    {name:"Strawberry Cheesecake",description:"Cream cheese, fresh strawberries, graham crumble, and berry drizzle.",price:"$11",category:"Crepes",emoji:"🍓",
+     image:"https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600&auto=format&fit=crop&q=80"},
+    {name:"Lotus Biscoff",description:"Biscoff spread, caramelized biscuits, and vanilla cream.",price:"$12",category:"Crepes",emoji:"🍂",
+     image:"https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=600&auto=format&fit=crop&q=80"},
+    {name:"S'mores Crepe",description:"Chocolate, marshmallow, graham cracker, toasted marshmallow.",price:"$11",category:"Crepes",emoji:"🔥",
+     image:"https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=600&auto=format&fit=crop&q=80"},
+    // BROWNIES
+    {name:"Classic Fudge Brownie",description:"Dense, gooey, and rich. Served warm.",price:"$6",category:"Brownies",emoji:"🟫",
+     image:"https://images.unsplash.com/photo-1564355808539-22fda35bed7e?w=600&auto=format&fit=crop&q=80"},
+    {name:"Brownie Sundae",description:"Warm brownie topped with vanilla ice cream, hot fudge, and caramel drizzle.",price:"$10",category:"Brownies",emoji:"🍨",
+     image:"https://images.unsplash.com/photo-1580984969071-a8da8e0572b4?w=600&auto=format&fit=crop&q=80"},
+    {name:"Blondie",description:"Brown butter blondie with white chocolate chips.",price:"$6",category:"Brownies",emoji:"⭐",
+     image:"https://images.unsplash.com/photo-1548365328-8c6db3220e4c?w=600&auto=format&fit=crop&q=80"},
+    {name:"Brownie Shake Combo",description:"A shake of your choice paired with our signature warm brownie.",price:"$18",category:"Brownies",emoji:"🤝",
+     image:"https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=600&auto=format&fit=crop&q=80"},
+    // COOKIES
+    {name:"Chocolate Chip OG",description:"Baked fresh daily. Crispy edge, gooey centre.",price:"$3.50",category:"Cookies",emoji:"🍪",
+     image:"https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=600&auto=format&fit=crop&q=80"},
+    {name:"Double Chocolate",description:"Cocoa dough loaded with dark and milk chocolate chips.",price:"$4",category:"Cookies",emoji:"🍫",
+     image:"https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&auto=format&fit=crop&q=80"},
+    {name:"Snickerdoodle",description:"Cinnamon-sugar coated softness.",price:"$3.50",category:"Cookies",emoji:"🌀",
+     image:"https://images.unsplash.com/photo-1591396058916-b15c547be19a?w=600&auto=format&fit=crop&q=80"},
+    {name:"Cookie Butter",description:"Inspired by Biscoff — buttery, spiced, completely addictive.",price:"$4.50",category:"Cookies",emoji:"🧡",
+     image:"https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=600&auto=format&fit=crop&q=80"},
   ],
   hours:[
     {day:"Monday",hours:"Closed"},{day:"Tuesday",hours:"5:00 PM – 11:00 PM"},
@@ -956,7 +999,13 @@ const FB = {
     {day:"Friday",hours:"5:00 PM – 1:00 AM"},{day:"Saturday",hours:"5:00 PM – 1:00 AM"},
     {day:"Sunday",hours:"4:00 PM – 11:00 PM"},
   ],
-  gallery:[],
+  gallery:[
+    {label:"Hero Shot",caption:"The Star Shot",image:"https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=1200&auto=format&fit=crop&q=80"},
+    {label:"Milkshake",caption:"Signature Shakes",image:"https://images.unsplash.com/photo-1688831908701-e2a10d99dfdc?w=800&auto=format&fit=crop&q=80"},
+    {label:"Crepe Close-up",caption:"Fresh Crepes",image:"https://images.unsplash.com/photo-1519676867240-f03562e64548?w=800&auto=format&fit=crop&q=80"},
+    {label:"Brownie",caption:"Warm Brownies",image:"https://images.unsplash.com/photo-1564355808539-22fda35bed7e?w=800&auto=format&fit=crop&q=80"},
+    {label:"Cookies",caption:"Baked Daily",image:"https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=800&auto=format&fit=crop&q=80"},
+  ],
 };
 
 async function loadContent() {
@@ -983,9 +1032,10 @@ function renderGallery(gallery) {
 }
 
 function renderStoryPhotos(gallery) {
-  const ph = `<div class="story-img-ph">🍫</div>`;
-  document.getElementById('storyImg1').innerHTML = gallery[0]?.image ? `<img src="${gallery[0].image}" alt="" loading="lazy" style="width:100%;height:100%;min-height:240px;object-fit:cover">` : ph;
-  document.getElementById('storyImg2').innerHTML = gallery[1]?.image ? `<img src="${gallery[1].image}" alt="" loading="lazy" style="width:100%;height:100%;min-height:220px;object-fit:cover">` : ph;
+  const img1 = gallery[0]?.image || "https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=800&auto=format&fit=crop&q=80";
+  const img2 = gallery[1]?.image || "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=800&auto=format&fit=crop&q=80";
+  document.getElementById('storyImg1').innerHTML = `<img src="${img1}" alt="" loading="lazy" style="width:100%;height:100%;min-height:240px;object-fit:cover">`;
+  document.getElementById('storyImg2').innerHTML = `<img src="${img2}" alt="" loading="lazy" style="width:100%;height:100%;min-height:220px;object-fit:cover">`;
 }
 
 function renderMenu(items) {
